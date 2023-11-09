@@ -5,7 +5,7 @@ from datetime import date
 app = Flask(__name__)
 
 # Initialize date with today's date
-current_date = str("2023-08-02")
+current_date = str("2023-09-11")
 
 @app.route('/', methods=['GET', 'POST'])
 def get_news():
@@ -19,19 +19,29 @@ def get_news():
         new_date = request.form.get("new_date")
         if new_date:
             current_date = new_date
+    try:
+        data = requests.get(
+            f"https://newsapi.org/v2/everything?q=Apple&from={current_date}&sortBy=popularity&apiKey=cdf47c8dfa1c44f6a091ce327825a53a"
+        )
 
-    data = requests.get(
-        f"https://newsapi.org/v2/everything?q=Apple&from={current_date}&sortBy=popularity&apiKey=cdf47c8dfa1c44f6a091ce327825a53a"
-    )
-    res = data.json()["articles"]
 
-    for i in res:
-        titles.append(i["title"])
-        description.append(i["description"])
-        page_url.append(i["url"])
-        image_url.append(i["urlToImage"])
+        status = data.json()["status"]  
+        res = data.json()["articles"]
+        
+        for i in res:
+            titles.append(i["title"])
+            description.append(i["description"])
+            page_url.append(i["url"])
+            image_url.append(i["urlToImage"])
 
-    return render_template('index.html', info=[titles, description, page_url, image_url, current_date])
+        return render_template('index.html', info=[titles, description, page_url, image_url, current_date])
+    except:
+        return render_template('error.html')
+
+    
+    
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

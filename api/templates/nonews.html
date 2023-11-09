@@ -98,25 +98,10 @@
     <input type="date" name="new_date">
     <input type="submit" value="Get News" class="btn btn-primary">
   </form>
-  <div class="row">
-    {% for i in range(30) %}
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        <img class="card-img-top" src={{ info[3][i] }} alt="Card image">
-        <div class="card-body">
-          <h4 class="card-title">{{ info[0][i][:120] }}...</h4>
-          <p class="card-text">{{ info[1][i][:100] }} ...</p>
-          <a href={{ info[2][i] }} class="btn btn-primary">Read more</a>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-  
-  <p class="text-center">{{ outputtext }}</p>
+  <br>
+  <h2 class="text-center" > No News Avaiable , Select other date  </p>
+ 
 </div>
-<script>
-  
-</script>
+
 </body>
 </html>
