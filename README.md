@@ -24,3 +24,5 @@ This is a simple news website built using Flask and the News API. The website re
 
 -  Flask
 - News API
+- HTML & CSS
+- Bootstrap
